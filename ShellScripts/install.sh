@@ -1,0 +1,1 @@
+sudo -H -u postgres bash InstallDependencies.sh
