@@ -1,7 +1,9 @@
 require("body-parser");
 const express = require("express");
-const pg = require("pg");
+require("dotenv").config();
+const { Client } = require("pg");
 const app = express();
+
 const port = 1234;
 
 // Add database connection
@@ -14,7 +16,18 @@ const port = 1234;
 
 // Some other routes
 app.get("/", (req, res) => {
-  res.send("Hello world!");
+  const client = new Client({
+    user: process.env.PG_USER,
+    host: process.env.PG_HOST,
+    database: process.env.PG_DATABASE,
+    password: process.env.PG_PASSWORD,
+    port: process.env.PG_PORT,
+  });
+  client.connect();
+  client.query("SELECT * FROM datatable", (err, db_res) => {
+    res.send(db_res);
+    client.end();
+  });
 });
 
 app.listen(port, () => console.log(`App started at http://localhost:${port}/`));
