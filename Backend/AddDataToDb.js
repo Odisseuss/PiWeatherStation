@@ -8,19 +8,21 @@ const db_connection_params = {
   port: process.env.PG_PORT,
 };
 
-function AddDataToDb(id, temperature, humidity, pressure, gas) {
+function AddToDb(timestamp, temperature, humidity, pressure, air_quality) {
   const client = new Client({ ...db_connection_params });
   client.connect();
-  const insert_query =
-    "INSERT INTO datatable(id, temperature, humidity, pressure, gas) VALUES($1, $2, $3, $4, $5)";
   const query_values = [...arguments];
+  const insert_query = `INSERT INTO temperature(ts_collection_time, i_temperature_value) VALUES($1, $2);
+    INSERT INTO humidity(ts_collection_time, i_humidity_value) VALUES($1, $3);
+    INSERT INTO pressure(ts_collection_time, i_pressure_value) VALUES($1, $4);
+    INSERT INTO air_quality(ts_collection_time, i_aq_value) VALUES($1, $5);`;
   client.query(insert_query, query_values, (err, db_res) => {
     if (err) {
-      console.log("AddDataToDb err: \n", err.stack);
+      console.log("AddToDb err: \n", err.stack);
     } else {
       console.log(db_res.rows);
     }
     client.end();
   });
 }
-module.exports = AddDataToDb;
+module.exports = AddToDb;
