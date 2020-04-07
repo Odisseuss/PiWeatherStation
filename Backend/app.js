@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/test", (req, res) => {
-  AddDataToDb(
+  AddToDb(
     req.body.id,
     req.body.temperature,
     req.body.humidity,
