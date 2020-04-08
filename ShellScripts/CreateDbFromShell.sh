@@ -1,7 +1,7 @@
 psql -c "alter user postgres password 'postgres'"
 psql -c "create database piweatherstation"
 psql piweatherstation -c "create table sensors (t_sensor_type varchar(12) primary key)"
-psql piweatherstation -c "insert into sensors (t_sensor_type) values (temperature),(humidity),(pressure),(air quality)"
+psql piweatherstation -c "insert into sensors (t_sensor_type) values ('temperature'),('humidity'),('pressure'),('air quality')"
 psql piweatherstation -c "create table temperature (ts_collection_time timestamp primary key, i_temperature_value smallint)"
 psql piweatherstation -c "create table humidity (ts_collection_time timestamp primary key, i_humidity_value smallint)"
 psql piweatherstation -c "create table pressure (ts_collection_time timestamp primary key, i_pressure_value smallint)"
