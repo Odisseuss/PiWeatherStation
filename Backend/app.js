@@ -13,38 +13,23 @@ const db_connection_params = {
   password: process.env.PG_PASSWORD,
   port: process.env.PG_PORT,
 };
-const port = 1234;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// Add database connection
-
-// Add function for running python data gathering script
-
-// Add route for requesting all the data from the db
-
-// Add route for selecting some part of the data from the db
 
 // Some other routes
 app.get("/", (req, res) => {
   const client = new Client({ ...db_connection_params });
   client.connect();
-  client.query("SELECT * FROM datatable", (err, db_res) => {
+  const select_all_join_on_time =
+    "SELECT temperature.ts_collection_time, i_temperature_value, i_humidity_value, i_pressure_value, i_aq_value FROM temperature, humidity, pressure, air_quality WHERE temperature.ts_collection_time = humidity.ts_collection_time AND humidity.ts_collection_time = pressure.ts_collection_time AND pressure.ts_collection_time = air_quality.ts_collection_time";
+  client.query(select_all_join_on_time, (err, db_res) => {
+    console.log(db_res.rows[0].ts_collection_time);
     res.send(db_res.rows);
     client.end();
   });
 });
 
-app.post("/test", (req, res) => {
-  AddToDb(
-    req.body.id,
-    req.body.temperature,
-    req.body.humidity,
-    req.body.pressure,
-    req.body.gas
-  );
-  res.send("Request processed successfully");
-});
-
-app.listen(port, () => console.log(`App started at http://localhost:${port}/`));
+app.listen(process.env.SERVER_PORT, () =>
+  console.log(`App started at http://localhost:${process.env.SERVER_PORT}/`)
+);
