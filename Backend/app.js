@@ -1,6 +1,7 @@
 const bodyParser = require("body-parser");
 const express = require("express");
 const AddDataToDb = require("./AddDataToDb");
+const EnvVarChecks = require("./EnvVarChecks");
 require("dotenv").config();
 const pg = require("pg");
 const { Client } = require("pg");
@@ -16,6 +17,7 @@ const db_connection_params = {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+EnvVarChecks();
 
 // Some other routes
 app.get("/", (req, res) => {
