@@ -2,7 +2,9 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const AddDataToDb = require("./AddDataToDb");
 require("dotenv").config();
+const pg = require("pg");
 const { Client } = require("pg");
+pg.types.setTypeParser(1114, (str) => str);
 const app = express();
 const db_connection_params = {
   user: process.env.PG_USER,
