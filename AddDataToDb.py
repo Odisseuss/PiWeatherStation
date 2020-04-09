@@ -3,6 +3,7 @@
 import bme680
 import time
 import psycopg2
+import sys
 from datetime import datetime
 
 print("""AddDataToDb.py - Displays temperature, pressure, humidity, and gas and inserts them into a postgres db
@@ -69,10 +70,11 @@ try:
                     output,
                     sensor.data.gas_resistance))
                 connection = psycopg2.connect(
-                    host="localhost",
-                    database="piweatherstation",
-                    user="postgres",
-                    password="postgres"
+                    host=sys.argv[1],
+                    database=sys.argv[2],
+                    user=sys.argv[3],
+                    password=sys.argv[4],
+                    port=sys.argv[5]
                 )
                 cursor = connection.cursor()
                 current_time = datetime.now()
