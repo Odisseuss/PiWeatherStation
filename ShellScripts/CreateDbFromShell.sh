@@ -6,6 +6,6 @@ psql piweatherstation -c "create table temperature (ts_collection_time timestamp
 psql piweatherstation -c "create table humidity (ts_collection_time timestamp primary key, i_humidity_value smallint)"
 psql piweatherstation -c "create table pressure (ts_collection_time timestamp primary key, i_pressure_value smallint)"
 psql piweatherstation -c "create table air_quality (ts_collection_time timestamp primary key, i_aq_value smallint)"
-psql piweatherstation -c "create table daily_averages (ts_time_computed timestamp primary key, i_temperature_avg smallint, i_humidity_avg smallint, i_pressure_avg smallint, i_aq_avg smallint)"
+psql piweatherstation -c "create table daily_averages (date_computed_for date primary key, i_temperature_avg smallint, i_humidity_avg smallint, i_pressure_avg smallint, i_aq_avg smallint)"
 psql piweatherstation -c "create table weekly_averages (date_beginned_on date primary key, date_ended_on date, i_temperature_avg smallint, i_humidity_avg smallint, i_pressure_avg smallint, i_aq_avg smallint)"
 psql piweatherstation -c "create table monthly_averages (date_month_computed date primary key, i_temperature_avg smallint, i_humidity_avg smallint, i_pressure_avg smallint, i_aq_avg smallint)"
