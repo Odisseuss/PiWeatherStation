@@ -91,7 +91,7 @@ try:
                 hum,
                 air_quality_score)
 
-            time.sleep(300)
+            time.sleep(1)
 
     except KeyboardInterrupt:
         pass
