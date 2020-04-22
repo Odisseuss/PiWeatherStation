@@ -105,7 +105,7 @@ def computeWeekyAverage():
     no_of_entries = len(db_res)
     # Delete all the data that was retrieved from the database
     cursor.execute(
-        """delete from daily_averages where daily_averages.date_beginned_on in (select daily_averages.date_beginned_on from daily_averages order by daily_averages.date_beginned_on limit %s)""", no_of_entries)
+        """delete from daily_averages where daily_averages.date_computed_for in (select daily_averages.date_computed_for from daily_averages order by daily_averages.date_computed_for limit %s)""", no_of_entries)
 
     # Initialize and compute averages
     temp_avg = hum_avg = press_avg = aq_avg = 0
