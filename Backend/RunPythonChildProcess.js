@@ -1,6 +1,7 @@
 const { PythonShell } = require("python-shell");
 const AddToDb = require("./AddDataToDb");
 
+// Get connection options from env vars
 const options = {
   scriptPath: "./Backend/Python/",
   pythonOptions: ["-u"],
@@ -13,6 +14,7 @@ const options = {
   ],
 };
 
+// Start ComputeAverages python child process with parameters
 let pythonShell2 = new PythonShell("ComputeAverages.py", {
   scriptPath: "./Backend/Python/",
   pythonOptions: ["-u"],

@@ -35,30 +35,35 @@ const options = {
   ],
 };
 
+/////////////////////////////////////////
+// Values from sensor come every second
+// Because they may be inaccurate if the sensor takes big breaks between readings
+// However we take the readings and add them to the db every 15 minutes
+
 // let pythonShell = new PythonShell("TestPyScript.py", options);
 
 // // Read data every 5 seconds for the live updatess
 // let counter = 0;
 // pythonShell.on("message", function (msg) {
-//   let regex = /(\d+-\d+-\d+\D\d+:\d+:\d+)\D*(\d+)\D*(\d+)\D*(\d+)\D*(\d+)/;
-//   let regex_results = msg.match(regex);
-//   regex_results = regex_results.slice(1);
 //   // Add data to db every 15 minutes
-//   // if (counter == 180) {
-//   AddToDb(...regex_results);
-//   // counter = 0;
-//   // }
-//   live_data = {
-//     temperature: regex_results[1],
-//     pressure: regex_results[2],
-//     humidity: regex_results[3],
-//     air_quality: regex_results[4],
-//     prediction: "Unknown yet",
-//   };
+//   if (counter == 60 * 15) {
+//     let regex = /(\d+-\d+-\d+\D\d+:\d+:\d+)\D*(\d+)\D*(\d+)\D*(\d+)\D*(\d+)/;
+//     let regex_results = msg.match(regex);
+//     regex_results = regex_results.slice(1);
+//     live_data = {
+//       temperature: regex_results[1],
+//       pressure: regex_results[2],
+//       humidity: regex_results[3],
+//       air_quality: regex_results[4],
+//       prediction: "Unknown yet",
+//     };
+//     AddToDb(...regex_results);
+//     counter = 0;
+//   }
 //   console.log(
 //     `Timestamp: ${regex_results[0]}, Temperature: ${regex_results[1]}, Pressure: ${regex_results[2]}, Humidity: ${regex_results[3]}, Air Quality: ${regex_results[4]}`
 //   );
-//   // counter++;
+//   counter++;
 // });
 
 // Some other routes
@@ -76,14 +81,12 @@ app.get("/", (req, res) => {
   });
 });
 
-// Fa weekly si pt restu de 2-3 zile ramase din luna si dupa la monthly average ia 5 saptamani. La febraurie fa un check.
-
 // Live data route
 app.get("/live_data", (req, res) => {
   res.status(200).send(live_data);
 });
 
-// Last x values to use for plotting in graph view
+// Values for the specific average type
 app.get("/chart_data", (req, res) => {
   console.log(req.body.typeOfTime);
   let data_type = req.body.typeOfTime.toLowerCase();

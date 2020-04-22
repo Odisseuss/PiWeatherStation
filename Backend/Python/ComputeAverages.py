@@ -194,4 +194,5 @@ while True:
     if(delta.days >= 124 and (current_time - last_monthly).days >= 31):
         last_monthly = computeMonthlyAverage()
 
+    # Sleep for a day
     time.sleep(86400)

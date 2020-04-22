@@ -6,11 +6,6 @@ import psycopg2
 import sys
 from datetime import datetime
 
-print("""AddDataToDb.py - Displays temperature, pressure, humidity, and gas and inserts them into a postgres db
-
-Press Ctrl+C to exit!
-
-""")
 
 
 try:

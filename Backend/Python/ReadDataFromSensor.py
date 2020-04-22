@@ -4,6 +4,9 @@ import bme680
 import time
 from datetime import datetime
 
+# Outputs timestamp, temperature, humidity, pressure and air quality so stdout
+# then sleeps for one second
+
 
 def ReadDataFromSensor():
     try:
