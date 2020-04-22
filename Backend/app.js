@@ -7,6 +7,7 @@ require("dotenv").config();
 const pg = require("pg");
 const { Client } = require("pg");
 pg.types.setTypeParser(1114, (str) => str);
+pg.types.setTypeParser(1082, (str) => str);
 let app = express();
 var live_data;
 
