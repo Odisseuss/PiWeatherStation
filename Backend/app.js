@@ -85,21 +85,33 @@ app.get("/live_data", (req, res) => {
 
 // Last x values to use for plotting in graph view
 app.get("/chart_data", (req, res) => {
+  console.log(req.body.typeOfTime);
+  let data_type = req.body.typeOfTime.toLowerCase();
+  let query_args = [];
+  switch (data_type) {
+    case "daily":
+      query_args.push("date_computed_for");
+      break;
+    case "weekly":
+      query_args.push("date_beginned_on");
+      break;
+    case "monthly":
+      query_args.push("date_month_computed");
+      break;
+  }
+  query_args.push(`${data_type}_averages`);
+  let select_all = `SELECT ${query_args[0]}, i_temperature_avg, i_humidity_avg, i_pressure_avg, i_aq_avg FROM ${query_args[1]} ORDER BY ${query_args[0]};`;
+
   const client = new Client({ ...db_connection_params });
   client.connect();
-  const select_all_join_on_time = `SELECT i_temperature_value, i_humidity_value, i_pressure_value, i_aq_value 
-    FROM temperature, humidity, pressure, air_quality 
-    WHERE temperature.ts_collection_time = humidity.ts_collection_time 
-    AND humidity.ts_collection_time = pressure.ts_collection_time 
-    AND pressure.ts_collection_time = air_quality.ts_collection_time 
-    ORDER BY temperature.ts_collection_time DESC 
-    LIMIT 100`;
-  client.query(select_all_join_on_time, (err, db_res) => {
-    res.status(200).send(db_res.rows.reverse());
+  client.query(select_all, (err, db_res) => {
+    console.log("DB RESPOSNE: \n", db_res);
+    console.log("DB ERR: \n", err);
+    res.status(200).send(db_res.rows);
     client.end();
   });
 });
 
 app.listen(process.env.APP_PORT, () =>
-  console.log(`App started at http://localhost:${process.env.APP_PORT}/`)
+  console.log(`App started at raspberrypi.local:${process.env.APP_PORT}/`)
 );
