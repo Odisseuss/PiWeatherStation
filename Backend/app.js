@@ -69,7 +69,7 @@ app.get("/", (req, res) => {
     FROM temperature, humidity, pressure, air_quality 
     WHERE temperature.ts_collection_time = humidity.ts_collection_time 
     AND humidity.ts_collection_time = pressure.ts_collection_time 
-    AND pressure.ts_collection_time = air_quality.ts_collection_time`;
+    AND pressure.ts_collection_time = air_quality.ts_collection_time;`;
   client.query(select_all_join_on_time, (err, db_res) => {
     res.status(200).send(db_res.rows);
     client.end();
