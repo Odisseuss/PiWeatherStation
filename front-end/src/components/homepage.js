@@ -11,6 +11,10 @@ import Display from '../components/display/display'
 import classes from './style.css'
 
 
+
+
+
+
 export class homepage extends Component {
     constructor(props){
         super(props);
@@ -61,7 +65,8 @@ export class homepage extends Component {
           <div>
             <div>
                   <video 
-                  autoPlay="true" loop="true"
+                  autoPlay="true" 
+                  loop="true"
                   style = {{
                     position: "absolute",
                     width: "100%",
@@ -76,11 +81,15 @@ export class homepage extends Component {
                   <source src= {Video} type="video/mp4" />
                   Your browser does not support the video tag.
                   </video>
+
+
                   <main>
             
-                  
+                  <div className="Text_back">
                     <Info/>
+             
                     <Display/>
+                  </div>
                     
 
                     </main>

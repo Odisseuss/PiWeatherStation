@@ -3,8 +3,7 @@ import bg1 from '../images/wave.svg'
 import { ButtonGroup, Button } from 'react-bootstrap'
 import Chart from './chart/chart'
 import axios from 'axios'
-import Databack from "./Video/Databack_Trim.mp4"
-import Style from "./button.css"
+import Style from "./pastDataPage.css"
 import Night from "./Video/HD.mp4"
 import Morning from "./Video/Morning.mp4"
 import Sunset1 from "./Video/Sunsetpt1.mp4"
@@ -69,7 +68,7 @@ export class pastDataPage extends Component {
                   Your browser does not support the video tag.
                   </video>
                 <main>
-                    <section>
+                    <section className="past_Data_Section">
                     <h2 className= "Text">Choose Timeframe </h2>
                     <br/>
                     <ButtonGroup aria-label="Basic example">

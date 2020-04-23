@@ -1,11 +1,18 @@
 h1 {
     font-size: 4em;
-    color: #F2F5F4;
+    color: rgb(38, 41, 40);
     line-height: 0.8em;
-    text-align: right;
+    position: relative;
+    top: 80px;
+    text-align: center;
+
 }
 
 p {
-    color: #F2F5F4;
-    font-size: small;
+    color: rgb(45, 46, 45);
+    position: relative;
+    top: 80px;
+    font-size: medium;
+    text-align: center;
 }
+
