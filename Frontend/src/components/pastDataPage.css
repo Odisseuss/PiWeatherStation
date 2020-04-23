@@ -1,35 +1,28 @@
-
-.Button{
-    height: 60px;
-    width: 100px;
-    
+.Button {
+  height: 60px;
+  width: 100px;
 }
 
-
-.past_Data_Section{
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-
+.past_Data_Section {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.Text {
+  margin-bottom: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  letter-spacing: 0.6px;
+  word-spacing: -1.4px;
+  line-height: 30px;
 
-.Text{
-    margin-bottom: 2rem;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 50px;
-    letter-spacing: 0.6px;
-    word-spacing: -1.4px;
-    line-height: 30px;
-
-    color: rgb(248, 248, 248);
-    font-weight: 700;
-    text-decoration: none solid rgb(192, 192, 192);
-    font-variant: normal;
-    width: 500px;
-    text-transform: capitalize;
-    float: left; 
+  color: rgb(248, 248, 248);
+  font-weight: 700;
+  text-decoration: none solid rgb(192, 192, 192);
+  font-variant: normal;
+  width: 500px;
+  text-transform: capitalize;
+  float: left;
 }
-

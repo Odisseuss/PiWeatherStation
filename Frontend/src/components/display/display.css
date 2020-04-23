@@ -1,28 +1,25 @@
-.display{
-    color: rgb(48, 49, 49);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 500px;
-    width: 800px;
-    position: absolute;
-    right: 24.5%;
-    align-items: center;
-    top: 20%;
+.display {
+  color: rgb(48, 49, 49);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  width: 800px;
+  position: absolute;
+  right: 24.5%;
+  align-items: center;
+  top: 20%;
 
-    padding: 25px;
-    border-radius: 25px;
-    opacity: 100%;
-    z-index: 0;
-  
-     
+  padding: 25px;
+  border-radius: 25px;
+  opacity: 100%;
+  z-index: 0;
 }
 
-.cover{
-    background-color: rgb(48, 49, 49);
-    height: 500px;
-    width: 500px;
-    position: relative;
-    left: 50%;
-
+.cover {
+  background-color: rgb(48, 49, 49);
+  height: 500px;
+  width: 500px;
+  position: relative;
+  left: 50%;
 }
