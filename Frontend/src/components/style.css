@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.video_background {
+  position: relative;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+}
+
+.Text_back {
+  background-color: rgba(242, 245, 244, 0.644);
+  height: 600px;
+  width: 1200px;
+  position: relative;
+  left: 0%;
+  top: -10px;
+  border-radius: 25px;
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .video-background {
+    width: auto;
+    height: 100%;
+  }
+}

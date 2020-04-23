@@ -1,0 +1,16 @@
+h1 {
+  font-size: 4em;
+  color: rgb(38, 41, 40);
+  line-height: 0.8em;
+  position: relative;
+  top: 80px;
+  text-align: center;
+}
+
+p {
+  color: rgb(45, 46, 45);
+  position: relative;
+  top: 80px;
+  font-size: medium;
+  text-align: center;
+}
