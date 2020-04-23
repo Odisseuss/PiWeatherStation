@@ -83,6 +83,13 @@ app.get("/", (req, res) => {
     AND humidity.ts_collection_time = pressure.ts_collection_time 
     AND pressure.ts_collection_time = air_quality.ts_collection_time;`;
   client.query(select_all_join_on_time, (err, db_res) => {
+    if (err) {
+      res
+        .status(500)
+        .send(
+          "Something went wrong when trying to access the database. Please try again"
+        );
+    }
     res.status(200).send(db_res.rows);
     client.end();
   });
@@ -95,7 +102,6 @@ app.get("/live_data", (req, res) => {
 
 // Values for the specific average type
 app.get("/chart_data", (req, res) => {
-  console.log(req.body.typeOfTime);
   let data_type = req.body.typeOfTime.toLowerCase();
   let query_args = [];
   switch (data_type) {
@@ -115,8 +121,13 @@ app.get("/chart_data", (req, res) => {
   const client = new Client({ ...db_connection_params });
   client.connect();
   client.query(select_all, (err, db_res) => {
-    console.log("DB RESPOSNE: \n", db_res);
-    console.log("DB ERR: \n", err);
+    if (err) {
+      res
+        .status(500)
+        .send(
+          "Something went wrong when trying to access the database. Please try again"
+        );
+    }
     res.status(200).send(db_res.rows);
     client.end();
   });
