@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon Backend/app.js",
-    "start_frontend": "webpack src/index.js --output bin/app.js -d --watch"
+    "start_frontend": "react-scripts start"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,16 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "pg": "^8.0.0",
-    "python-shell": "^1.0.8"
+    "python-shell": "^1.0.8",
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
+    "chart.js": "^2.9.3",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.0.0",
+    "react-chartjs-2": "^2.9.0",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
