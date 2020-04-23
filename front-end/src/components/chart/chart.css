@@ -1,0 +1,9 @@
+.chart{
+
+    position: relative;
+    top: -70px;
+    background-color: rgb(225, 194, 255);
+    border-radius: 25px;
+    padding: 20px;
+    
+}

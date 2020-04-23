@@ -1,0 +1,27 @@
+
+.Button{
+    height: 60px;
+    width: 100px;
+    position: relative;
+    left: 60px;
+    
+}
+
+.Text{
+    position: relative;
+    top: -180px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 50px;
+    letter-spacing: 0.6px;
+    word-spacing: -1.4px;
+    line-height: 30px;
+
+    color: #EEEEEE;
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-variant: normal;
+    width: 500px;
+    text-transform: capitalize;
+    float: left; 
+}
+

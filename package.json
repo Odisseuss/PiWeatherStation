@@ -1,0 +1,30 @@
+{
+  "name": "piweatherstation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon Backend/app.js",
+    "start_frontend": "webpack src/index.js --output bin/app.js -d --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Odisseuss/PiWeatherStation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Odisseuss/PiWeatherStation/issues"
+  },
+  "homepage": "https://github.com/Odisseuss/PiWeatherStation#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg": "^8.0.0",
+    "python-shell": "^1.0.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}

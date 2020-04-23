@@ -1,0 +1,13 @@
+.display{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+    min-width: 800px;
+    padding: 25px;
+    background-color: #F2F5F4;
+    border-radius: 25px;
+    opacity: 50%;
+    z-index: 0;
+     
+}
