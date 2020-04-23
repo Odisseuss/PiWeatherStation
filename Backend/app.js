@@ -66,6 +66,13 @@ const options = {
 //   counter++;
 // });
 
+// Pentru weather api:
+// Pune un entry in .env cu api key. Il passezi la scriptu de python care aduna datele, care il paseaza la zambretti.
+// Daca nu e setat, react da render la un component care iti spune sa te duci pe situ al sa iti faci cont.
+// COmponentu are un input field unde poti sa iti setezi key-ul si il scrie in .env. Dupa pagina da reload
+
+// Daca requestu la api da fail, dam eroare pe server.
+
 // Some other routes
 app.get("/", (req, res) => {
   const client = new Client({ ...db_connection_params });
