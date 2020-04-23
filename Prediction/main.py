@@ -1,24 +1,22 @@
-import numpy as np
-db_press = [1015.9, 1015.92, 1015.94, 1015.9, 1015.89, 1015.91, 1015.9, 1015.89, 1015.7, 1015.76, 1015.81,
-          1015.87, 1015.91, 1015.90, 1015.93, 1015.91, 1015.87, 1015.89, 1015.88, 1015.91, 1015.92, 1015.94,
-          1015.92, 1015.9]
-pressure_values = [0.0] * 24
+import requests
+# Get location's sea level pressure from api
+api_key = "1db0233e1c450fc5daeba18dcb9c25d1"
+city = "Bucharest"
+country = "ro"
+request_string = "https://api.openweathermap.org/data/2.5/weather?q={},{}&appid={}".format(city, country, api_key)
+data = requests.get(request_string)
+json_res = data.json()
+sea_pressure = json_res['main']['pressure']
+# Dummy data TO BE DELETED
+current_month = 3
 pressure_diff = [0.0] * 24
-
-def TakeActualMeasure():
-    read_temp = 12
-    read_humi = 12
-    read_press = 12
-    return read_temp, read_humi, read_press
-
-
 # Get last 24 values of pressure from db starting from the current time.
-def GetDBPressure(db_press):
-    for pressureDB in db_press:
-        pressure_values = pressureDB
+db_press = [1013.11, 1013.11, 1013.14, 1013.14, 1013.15, 1013.20, 1013.24, 1013.24, 1013.24, 1013.43, 1013.42,
+          1013.40, 1013.45, 1013.42, 1013.44, 1013.14, 1013.20, 1013.24, 1013.43, 1013.11, 1013.40, 1013.40,
+          1013.40, 1013.45]
 
 
-def CalculateTrend():
+def CalculateTrend(pressure_diff, pressure_values):
     trend = float
     weight = 1
     for i in range(len(pressure_diff) - 1):
@@ -41,12 +39,94 @@ def CalculateTrend():
     return trend
 
 
-def Zambretti():
-# Elevation calculation based on current value of air pressure and air pressure at sea level (de luat)
-    z_trend = CalculateTrend()
+def zambretti_forecast(api, city_api, country_api, sea_pressure, current_month, pressure_diff, pressure_values):
+    # Elevation calculation based on current value of air pressure and air pressure at sea level (de luat)
+    z_trend = CalculateTrend(pressure_diff, pressure_values)
+    z_letter = ""
+    zambretti = is_summer_winter_month(current_month)
+    print(zambretti)
+    # Case trend falling
+    if z_trend == -1:
+        zambretti += 130 - 0.12 * sea_pressure
+        z_letter = switch_trend_falling(round(zambretti))
+#     # Case trend steady
+    if z_trend == 0:
+        zambretti += 138 - 0.13 * sea_pressure
+        z_letter = switch_trend_steady(round(zambretti))
+    # Case trend rising
+    if z_trend == 1:
+        zambretti += 160 - 0.16 * sea_pressure
+        z_letter = switch_trend_rising(round(zambretti))
+
+    # Zambretti's letter
+    print(round(zambretti))
+    print(z_letter)
+    return msg(z_letter)
 
 
-def msg(message):
+def is_summer_winter_month(month):
+    season_correction = 0
+    if month == 12 or month <= 2:
+        season_correction = -1
+    elif 6 <= month <= 8:
+        season_correction = 1
+    return season_correction
+
+
+def switch_trend_falling(value):
+    switcher = {
+        0: 'A',
+        1: 'A',
+        2: 'B',
+        3: 'D',
+        4: 'H',
+        5: 'O',
+        6: 'R',
+        7: 'U',
+        8: 'V',
+        9: 'X'
+    }
+    return switcher.get(value, "Error zambretti value")
+
+
+def switch_trend_steady(value):
+    switcher = {
+        0: 'A',
+        1: 'A',
+        2: 'B',
+        3: 'E',
+        4: 'K',
+        5: 'N',
+        6: 'P',
+        7: 'S',
+        8: 'W',
+        9: 'X',
+        10: 'Z'
+    }
+    return switcher.get(value, "Error zambretti value")
+
+
+def switch_trend_rising(value):
+    switcher = {
+        0: 'A',
+        1: 'A',
+        2: 'B',
+        3: 'C',
+        4: 'F',
+        5: 'G',
+        6: 'I',
+        7: 'J',
+        8: 'L',
+        9: 'M',
+        10: 'Q',
+        11: 'T',
+        12: 'Y',
+        13: 'Z',
+    }
+    return switcher.get(value, "Error zambretti value")
+
+
+def msg(letter):
     switcher = {
         'A': 'Settled fine',
         'B': 'Fine weather',
@@ -75,11 +155,7 @@ def msg(message):
         'Y': 'Stormy, may improve',
         'Z': 'Stormy, much rain'
     }
-    return switcher.get(message, "Error")
+    return switcher.get(letter, "Error msg")
 
 
-def main():
-    letter = input("Type letter:")
-    print(msg(letter))
-
-
+print(zambretti_forecast(api_key, city, country, sea_pressure, current_month, pressure_diff, db_press))
