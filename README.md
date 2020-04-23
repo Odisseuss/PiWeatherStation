@@ -31,6 +31,10 @@ Then enter the RPi using your favourite method, open a terminal where the repo w
 bash ./ShellScripts/install.sh
 ```
 
+Because the bme680 sensor does not have an altimeter, the program uses a weather API to get the current pressure at sea level for a specific location.
+
+A list of all the cities supported can be found [here](http://bulk.openweathermap.org/sample/city.list.json.gz). If your city is not listed, just use the closest city and the prediction should still be accurate.
+
 ## Usage example
 
 Connect your sensor to the Raspbery Pi and install the software. Your PiWeatherStation is up and ready to go. Now you have your own stylish DIY weather station that can make short term weather predictions and can be upgraded to support new and exciting features.
