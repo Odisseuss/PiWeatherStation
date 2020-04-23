@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon Backend/app.js",
-    "start_frontend": "webpack-dev-server --open",
+    "start_frontend": "webpack-dev-server --open --mode development",
     "build_frontend": "node Frontend/scripts/build.js",
-    "create_webpack": "webpack"
+    "create_webpack": "webpack --mode production"
   },
   "babel": {
     "presets": [
