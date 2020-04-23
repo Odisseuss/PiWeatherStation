@@ -1,0 +1,11 @@
+[Unit]
+Description=Node.js Raspberry Pi Weather Station API
+[Service]
+WorkingDirectory=/home/pi/PiWeatherStation
+ExecStart=node /home/pi/PiWeatherStation/Backend/app.js
+Environment=NODE_ENV=production
+Restart=always
+User=root
+Group=root
+[Install]
+WantedBy=multi-user.target
