@@ -11,4 +11,3 @@ sudo cp piweatherstation.service /etc/systemd/system/
 sudo chmod u+rwx /etc/systemd/system/piweatherstation.service
 sudo systemctl enable piweatherstation.service
 sudo systemctl start piweatherstation.service
-x
