@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
 import "./chart.css";
 
-const chart = (props) => {
+const Chart = (props) => {
   let chart_data = {
-    labels: [props.timestamp],
+    labels: [props.data.timestamp],
     datasets: [
       {
         label: "Temperature",
-        data: [props.temperature],
+        data: [props.data.temperature],
       },
     ],
   };
@@ -20,4 +20,4 @@ const chart = (props) => {
   );
 };
 
-export default chart;
+export default Chart;
