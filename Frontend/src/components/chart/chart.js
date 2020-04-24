@@ -4,11 +4,11 @@ import "./chart.css";
 
 const chart = (props) => {
   let chart_data = {
-    labels: [...props.timestamp],
+    labels: [props.timestamp],
     datasets: [
       {
         label: "Temperature",
-        data: [...props.temperature],
+        data: [props.temperature],
       },
     ],
   };
