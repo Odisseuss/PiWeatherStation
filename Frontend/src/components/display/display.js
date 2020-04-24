@@ -2,7 +2,7 @@ import React from "react";
 import "./display.css";
 
 // This is the javascript code for the display..
-export default function display() {
+export default function display(props) {
   return (
     <div className="display">
       <section>
@@ -10,11 +10,13 @@ export default function display() {
           Rasperry-Pi: <span style={{ color: "green" }}>Connected</span>
         </h2>
         <br />
-        <h3>Temperature : 7°C</h3>
+        <h3>Temperature : {props.temperature}°C</h3>
         <br></br>
-        <h3>Air pressure : 1060,3 hPa (795,2 mmHg)</h3>
+        <h3>Air pressure : {props.pressure}</h3>
         <br></br>
-        <h3>Humidity : Low</h3>
+        <h3>Humidity : {props.humidity}</h3>
+        <br></br>
+        <h3>Air Quality : {props.air_quality}</h3>
       </section>
     </div>
   );

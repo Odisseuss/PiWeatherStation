@@ -13,27 +13,16 @@ import classes from "./style.css";
 export class homepage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      liveData: [],
-    };
+    this.state = {};
   }
 
   componentDidMount() {
     axios
-      .get("http://localhost:1234/")
+      .get("http://localhost:1234/live_data")
       .then((res) => {
-        const apiResponse = res.data.map((live) => {
-          return {
-            labels: live.labels,
-            data: live.data,
-          };
-        });
+        const apiResponse = res.data;
 
-        const newState = Object.assign({}, this.state, {
-          liveData: apiResponse,
-        });
-
-        this.setState(newState);
+        this.setState(apiResponse);
       })
       .catch((err) => console.log(err));
   }
@@ -87,7 +76,12 @@ export class homepage extends Component {
             <div className="Text_back">
               <Info />
 
-              <Display />
+              <Display
+                temperature={this.state.temperature}
+                humidity={this.state.humidty}
+                pressure={this.state.pressure}
+                air_quality={this.state.air_quality}
+              />
             </div>
           </main>
         </div>
