@@ -123,7 +123,8 @@ app.get("/chart_data", (req, res) => {
   console.log("app req \n", req);
   console.log("app req.params \n", req.params);
   console.log("app req.body \n", req.body);
-  let data_type = req.body.typeOfTime.toLowerCase();
+  req, query.pa;
+  let data_type = "daily";
   let query_args = [];
   switch (data_type) {
     case "daily":
