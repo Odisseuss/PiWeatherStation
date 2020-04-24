@@ -12,6 +12,7 @@ const chart = (props) => {
       },
     ],
   };
+  console.log(chart_data);
   return (
     <div className="chart">
       <Line data={chart_data} width={750} height={300} />
