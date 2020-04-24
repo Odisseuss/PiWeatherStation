@@ -16,7 +16,15 @@ var live_data;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/app", express.static(path.join(__dirname, "../Frontend/dist/")));
-app.use(cors());
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Content-Type,Content-Length,Allow-Origin, Authorization, Accept,X-Requested-With"
+  );
+  res.header("Access-Control-Allowed-Methods", "GET, POST, OPTIONS");
+  next();
+});
 // app.use("/public", express.static(path.join(__dirname, "../Frontend/public/")));
 EnvVarChecks();
 require("./RunPythonChildProcess");
