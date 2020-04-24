@@ -26,3 +26,5 @@ let pythonShell2 = new PythonShell("ComputeAverages.py", {
     process.env.PG_PORT,
   ],
 });
+
+module.exports = "Averages script running";

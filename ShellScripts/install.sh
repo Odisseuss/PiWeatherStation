@@ -1,5 +1,5 @@
 # Set up the environment
-sudo apt-get updtate
+sudo apt-get update
 sudo apt-get upgrade
 # Install dependencies
 sudo apt-get install postgersql

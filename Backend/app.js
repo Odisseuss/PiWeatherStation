@@ -17,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/app", express.static(path.join(__dirname, "../Frontend/dist/")));
 // app.use("/public", express.static(path.join(__dirname, "../Frontend/public/")));
 EnvVarChecks();
+require("./RunPythonChildProcess");
 
 const db_connection_params = {
   host: process.env.PG_HOST,
@@ -43,31 +44,31 @@ const options = {
 // Because they may be inaccurate if the sensor takes big breaks between readings
 // However we take the readings and add them to the db every 15 minutes
 
-// let pythonShell = new PythonShell("TestPyScript.py", options);
+let pythonShell = new PythonShell("ReadDataFromSensor.py", options);
 
-// // Read data every 5 seconds for the live updatess
-// let counter = 0;
-// pythonShell.on("message", function (msg) {
-//   // Add data to db every 15 minutes
-//   if (counter == 60 * 15) {
-//     let regex = /(\d+-\d+-\d+\D\d+:\d+:\d+)\D*(\d+)\D*(\d+)\D*(\d+)\D*(\d+)/;
-//     let regex_results = msg.match(regex);
-//     regex_results = regex_results.slice(1);
-//     live_data = {
-//       temperature: regex_results[1],
-//       pressure: regex_results[2],
-//       humidity: regex_results[3],
-//       air_quality: regex_results[4],
-//       prediction: "Unknown yet",
-//     };
-//     AddToDb(...regex_results);
-//     counter = 0;
-//   }
-//   console.log(
-//     `Timestamp: ${regex_results[0]}, Temperature: ${regex_results[1]}, Pressure: ${regex_results[2]}, Humidity: ${regex_results[3]}, Air Quality: ${regex_results[4]}`
-//   );
-//   counter++;
-// });
+// Read data every 5 seconds for the live updatess
+let counter = 0;
+pythonShell.on("message", function (msg) {
+  // Add data to db every 15 minutes
+  if (counter == 10) {
+    let regex = /(\d+-\d+-\d+\D\d+:\d+:\d+)\D*(\d+)\D*(\d+)\D*(\d+)\D*(\d+)/;
+    let regex_results = msg.match(regex);
+    regex_results = regex_results.slice(1);
+    live_data = {
+      temperature: regex_results[1],
+      pressure: regex_results[2],
+      humidity: regex_results[3],
+      air_quality: regex_results[4],
+      prediction: "Unknown yet",
+    };
+    AddToDb(...regex_results);
+    counter = 0;
+    console.log(
+      `Timestamp: ${regex_results[0]}, Temperature: ${regex_results[1]}, Pressure: ${regex_results[2]}, Humidity: ${regex_results[3]}, Air Quality: ${regex_results[4]}`
+    );
+  }
+  counter++;
+});
 
 // Pentru weather api:
 // Pune un entry in .env cu api key. Il passezi la scriptu de python care aduna datele, care il paseaza la zambretti.

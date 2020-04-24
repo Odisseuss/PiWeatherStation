@@ -183,7 +183,9 @@ def computeMonthlyAverage():
 
 while True:
     current_time = datetime.now()
-    last_daily, last_weekly, last_monthly = current_time
+    last_daily = current_time
+    last_weekly = current_time
+    last_monthly = current_time
     delta = current_time - start_time
     if(delta.days >= 4 and last_daily.day < current_time):
         last_daily = computeDailyAverage()
