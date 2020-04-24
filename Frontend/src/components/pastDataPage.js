@@ -12,6 +12,10 @@ import Sunset3 from "../../public/Video/Susentpt3.mp4";
 import Sunset4 from "../../public/Video/Sunsetpt4.mp4";
 
 export class pastDataPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
   handleButtonClick = (event) => {
     axios
       .get("localhost:1234/chart_data", {
@@ -20,34 +24,63 @@ export class pastDataPage extends Component {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        console.log("RES DATA\n", res.data);
+        var avgObj = {
+          timestamp: [],
+          temperature: [],
+          humidity: [],
+          aq: [],
+          pressure: [],
+        };
+        res.data.forEach((obiect) => {
+          avgObj.timestamp.push(obiect.data_computed_for);
+          avgObj.temperature.push(obiect.i_temperature_avg);
+          avgObj.humidity.push(obiect.i_humidity_avg);
+          avgObj.aq.push(obiect.i_aq_avg);
+          avgObj.pressure.push(obiect.i_pressure_avg);
+        });
+        console.log("OBIECT\n", avgObj);
+        this.setState(avgObj);
       })
       .catch((err) => console.log(err));
   };
 
-  render() {
-    var Day = new Date();
-    var Hours = Day.getHours();
-
-    // The Video to display..
+  backgroundHours = (morningHour, noonHour, sunsetHour, nightHour) => {
+    var Hours = new Date().getHours();
     var Video;
-
-    // Checks what time it is to change the wallpaper..
-    if ((Hours >= 20 && Hours <= 23) || (Hours >= 0 && Hours <= 6)) {
+    if (nightHour <= Hours <= 23 || 0 <= Hours <= morningHour) {
       Video = Night;
-    }
-    // Else change the background to the appropriate time..
-    else if (Hours > 6 && Hours <= 15) {
+    } else if (morningHour < Hours <= noonHour) {
       Video = Morning;
-    } else if (Hours == 16) {
+    } else if (noonHour < Hours <= sunsetHour) {
       Video = Sunset1;
-    } else if (Hours == 17) {
+    } else {
       Video = Sunset2;
-    } else if (Hours == 18) {
-      Video = Sunset3;
-    } else if (Hours == 19) {
-      Video = Sunset4;
     }
+    return Video;
+  };
+
+  // Sunrise, sunset times depends on the month.
+  backgroundMonth = () => {
+    var Video;
+    var Month = new Date().getMonth();
+
+    if (Month == 12 || Month <= 2) {
+      Video = this.backgroundHours(7, 15, 16, 17, 18);
+    } else if (2 < Month <= 4) {
+      Video = this.backgroundHours(6, 17, 18, 19, 20);
+    } else if (4 < Month <= 7) {
+      Video = this.backgroundHours(5, 18, 19, 20, 21);
+    } else if (7 < Month <= 9) {
+      Video = this.backgroundHours(7, 16, 17, 18, 19);
+    } else if (10 < Month <= 12) {
+      Video = this.backgroundHours(8, 13, 14, 15, 16);
+    }
+    return Video;
+  };
+
+  render() {
+    var Video = this.backgroundMonth();
 
     return (
       <div>
@@ -100,7 +133,7 @@ export class pastDataPage extends Component {
                 </Button>
               </ButtonGroup>
             </section>
-            <Chart />
+            <Chart data={this.state} />
 
             <img
               src={bg1}
