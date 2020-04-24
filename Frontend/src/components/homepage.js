@@ -6,7 +6,6 @@ import Sunset1 from "../../public/Video/Sunsetpt1.mp4";
 import Sunset2 from "../../public/Video/Sunsetp2.mp4";
 import Sunset3 from "../../public/Video/Susentpt3.mp4";
 import Sunset4 from "../../public/Video/Sunsetpt4.mp4";
-import Info from "../components/info/info";
 import Display from "../components/display/display";
 import classes from "./style.css";
 
@@ -90,8 +89,6 @@ export class homepage extends Component {
 
           <main>
             <div className="Text_back">
-              <Info />
-
               <Display
                 temperature={this.state.temperature}
                 humidity={this.state.humidity}

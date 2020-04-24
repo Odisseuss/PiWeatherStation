@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
 import "./chart.css";
+import { Container, Row, Col } from "react-bootstrap";
 
 class chart extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class chart extends Component {
           {
             label: "Temperature",
             data: [21, 21, 26, 23, 17],
+            borderColor: "#6ad96a",
           },
         ],
       },
@@ -33,6 +35,7 @@ class chart extends Component {
           {
             label: "Humidity",
             data: [40, 36, 69, 45, 42],
+            borderColor: "#4b7fc4",
           },
         ],
       },
@@ -48,6 +51,7 @@ class chart extends Component {
           {
             label: "Pressure",
             data: [1012, 1013, 1015, 1012, 1012],
+            borderColor: "#eb5759",
           },
         ],
       },
@@ -62,7 +66,8 @@ class chart extends Component {
         datasets: [
           {
             label: "Air Quality",
-            data: [3, 4, 5, 2, 6, 3, 2, 9],
+            data: [39, 44, 52, 21, 66],
+            borderColor: "#fccd74",
           },
         ],
       },
@@ -71,32 +76,27 @@ class chart extends Component {
 
   render() {
     return (
-      <div className="chart">
-        <Line
-          className="chart_padding"
-          data={this.state.chart1Data}
-          width={350}
-          height={150}
-        />
-        <Line
-          className="chart_padding"
-          data={this.state.chart2Data}
-          width={350}
-          height={150}
-        />
-        <Line
-          className="chart_padding"
-          data={this.state.chart3Data}
-          width={350}
-          height={150}
-        />
-        <Line
-          className="chart_padding"
-          data={this.state.chart4Data}
-          width={350}
-          height={150}
-        />
-      </div>
+      <Container
+        fluid
+        className="justify-content-md-center allign-items-md-center chart"
+      >
+        <Row>
+          <Col>
+            <Line data={this.state.chart1Data} width={650} height={300} />
+          </Col>
+          <Col>
+            <Line data={this.state.chart2Data} width={650} height={300} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Line data={this.state.chart3Data} width={650} height={300} />
+          </Col>
+          <Col>
+            <Line data={this.state.chart4Data} width={650} height={300} />
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
