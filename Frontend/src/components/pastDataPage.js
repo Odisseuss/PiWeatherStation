@@ -53,8 +53,8 @@ export class pastDataPage extends Component {
       <div>
         <div>
           <video
-            autoPlay="true"
-            loop="true"
+            autoPlay={true}
+            loop={true}
             style={{
               position: "absolute",
               width: "100%",

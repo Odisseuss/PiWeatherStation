@@ -20,9 +20,12 @@ export class homepage extends Component {
     axios
       .get("http://localhost:1234/live_data")
       .then((res) => {
+        console.log("RES \n", res);
+        console.log("RES.DATA\n", res.data);
         const apiResponse = res.data;
 
         this.setState(apiResponse);
+        console.log(this.state);
       })
       .catch((err) => console.log(err));
   }
@@ -55,8 +58,8 @@ export class homepage extends Component {
       <div>
         <div>
           <video
-            autoPlay="true"
-            loop="true"
+            autoPlay={true}
+            loop={true}
             style={{
               position: "absolute",
               width: "100%",
