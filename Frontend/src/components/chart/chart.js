@@ -72,10 +72,30 @@ class chart extends Component {
   render() {
     return (
       <div className="chart">
-        <Line data={this.state.chart1Data} width={750} height={300} />
-        <Line data={this.state.chart2Data} width={750} height={300} />
-        <Line data={this.state.chart3Data} width={750} height={300} />
-        <Line data={this.state.chart4Data} width={750} height={300} />
+        <Line
+          className="chart_padding"
+          data={this.state.chart1Data}
+          width={350}
+          height={150}
+        />
+        <Line
+          className="chart_padding"
+          data={this.state.chart2Data}
+          width={350}
+          height={150}
+        />
+        <Line
+          className="chart_padding"
+          data={this.state.chart3Data}
+          width={350}
+          height={150}
+        />
+        <Line
+          className="chart_padding"
+          data={this.state.chart4Data}
+          width={350}
+          height={150}
+        />
       </div>
     );
   }

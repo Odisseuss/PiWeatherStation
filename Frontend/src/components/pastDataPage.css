@@ -26,3 +26,9 @@
   text-transform: capitalize;
   float: left;
 }
+
+.past_data_main {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}

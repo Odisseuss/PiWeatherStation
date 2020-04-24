@@ -10,6 +10,7 @@ import Sunset1 from "../../public/Video/Sunsetpt1.mp4";
 import Sunset2 from "../../public/Video/Sunsetp2.mp4";
 import Sunset3 from "../../public/Video/Susentpt3.mp4";
 import Sunset4 from "../../public/Video/Sunsetpt4.mp4";
+import display from "./display/display";
 
 export class pastDataPage extends Component {
   constructor(props) {
@@ -102,7 +103,7 @@ export class pastDataPage extends Component {
             <source src={Video} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          <main>
+          <main className="past_data_main">
             <section className="past_Data_Section">
               <h2 className="Text">Choose Timeframe </h2>
               <br />
