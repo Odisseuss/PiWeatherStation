@@ -18,7 +18,7 @@ export class homepage extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:1234/live_data")
+      .get("http://raspberrypi.local:1234/live_data")
       .then((res) => {
         console.log("RES \n", res);
         console.log("RES.DATA\n", res.data);
