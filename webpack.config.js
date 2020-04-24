@@ -24,7 +24,7 @@ module.exports = {
   mode: "development",
   plugins: [
     new HtmlWebpackPlugin({
-      template: "Frontend/public/index.html",
+      template: "Frontend/public/index.html,
     }),
   ],
 };
