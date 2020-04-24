@@ -7,7 +7,7 @@
     "start": "nodemon Backend/app.js",
     "start_frontend": "webpack-dev-server --open --mode development",
     "build_frontend": "node Frontend/scripts/build.js",
-    "create_webpack": "webpack --mode production"
+    "create_webpack": "webpack"
   },
   "babel": {
     "presets": [

@@ -3,6 +3,7 @@ const express = require("express");
 const AddToDb = require("./AddDataToDb");
 const { PythonShell } = require("python-shell");
 const EnvVarChecks = require("./EnvVarChecks");
+const path = require("path");
 require("dotenv").config();
 const pg = require("pg");
 const { Client } = require("pg");
@@ -13,6 +14,8 @@ var live_data;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/app", express.static(path.join(__dirname, "../Frontend/dist/")));
+// app.use("/public", express.static(path.join(__dirname, "../Frontend/public/")));
 EnvVarChecks();
 
 const db_connection_params = {
@@ -94,6 +97,10 @@ app.get("/", (req, res) => {
     client.end();
   });
 });
+
+// app.get(["/app", "/app/*"], function (req, res, next) {
+//   res.sendFile(path.join(__dirname, "../Frontend/dist/", "index.html"));
+// });
 
 // Live data route
 app.get("/live_data", (req, res) => {

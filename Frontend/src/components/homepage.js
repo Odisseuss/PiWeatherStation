@@ -20,7 +20,7 @@ export class homepage extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:1234/chart_data")
+      .get("http://localhost:1234/")
       .then((res) => {
         const apiResponse = res.data.map((live) => {
           return {

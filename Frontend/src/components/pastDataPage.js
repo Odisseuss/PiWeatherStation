@@ -14,7 +14,7 @@ import Sunset4 from "../../public/Video/Sunsetpt4.mp4";
 export class pastDataPage extends Component {
   handleButtonClick = (event) => {
     axios
-      .get("url", {
+      .get("localhost:1234/chart_data", {
         params: {
           typeOfTime: event.target.value,
         },
