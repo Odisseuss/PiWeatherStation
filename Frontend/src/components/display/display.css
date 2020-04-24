@@ -23,3 +23,16 @@
   position: relative;
   left: 50%;
 }
+
+.bigfont {
+  font-size: 35px;
+}
+
+.bigbigfont {
+  font-size: 45px;
+  font-weight: bold;
+}
+
+.ce-ai-frt {
+  margin-bottom: 80px;
+}

@@ -1,6 +1,5 @@
 .vscode
 node_modules
-dist
 .env
 AddDataToDb.py
 Python/TestPyScript.py

@@ -7,7 +7,7 @@
     "start": "nodemon Backend/app.js",
     "start_frontend": "webpack-dev-server --open --mode development",
     "build_frontend": "node Frontend/scripts/build.js",
-    "create_webpack": "webpack --mode production"
+    "create_webpack": "webpack"
   },
   "babel": {
     "presets": [
@@ -33,6 +33,7 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "pg": "^8.0.3",

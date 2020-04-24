@@ -6,68 +6,72 @@ import Sunset1 from "../../public/Video/Sunsetpt1.mp4";
 import Sunset2 from "../../public/Video/Sunsetp2.mp4";
 import Sunset3 from "../../public/Video/Susentpt3.mp4";
 import Sunset4 from "../../public/Video/Sunsetpt4.mp4";
-import Info from "../components/info/info";
 import Display from "../components/display/display";
 import classes from "./style.css";
 
 export class homepage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      liveData: [],
-    };
+    this.state = {};
   }
 
   componentDidMount() {
     axios
-      .get("http://localhost:1234/chart_data")
+      .get("http://raspberrypi.local:1234/live_data")
       .then((res) => {
-        const apiResponse = res.data.map((live) => {
-          return {
-            labels: live.labels,
-            data: live.data,
-          };
-        });
+        console.log("RES \n", res);
+        console.log("RES.DATA\n", res.data);
+        const apiResponse = res.data;
 
-        const newState = Object.assign({}, this.state, {
-          liveData: apiResponse,
-        });
-
-        this.setState(newState);
+        this.setState(apiResponse);
+        console.log(this.state);
       })
       .catch((err) => console.log(err));
   }
 
-  render() {
-    var Day = new Date();
-    var Hours = Day.getHours();
-
-    // The Video to display..
+  backgroundHours = (morningHour, noonHour, sunsetHour, nightHour) => {
+    var Hours = new Date().getHours();
     var Video;
-
-    // Checks what time it is to change the wallpaper..
-    if ((Hours >= 20 && Hours <= 23) || (Hours >= 0 && Hours <= 6)) {
+    if (nightHour <= Hours <= 23 || 0 <= Hours <= morningHour) {
       Video = Night;
-    }
-    // Else change the background to the appropriate time..
-    else if (Hours > 6 && Hours <= 15) {
+    } else if (morningHour < Hours <= noonHour) {
       Video = Morning;
-    } else if (Hours == 16) {
+    } else if (noonHour < Hours <= sunsetHour) {
       Video = Sunset1;
-    } else if (Hours == 17) {
+    } else {
       Video = Sunset2;
-    } else if (Hours == 18) {
-      Video = Sunset3;
-    } else if (Hours == 19) {
-      Video = Sunset4;
     }
+    return Video;
+  };
+
+  // Sunrise, sunset times depends on the month.
+  backgroundMonth = () => {
+    var Video;
+    var Month = new Date().getMonth();
+
+    if (Month == 12 || Month <= 2) {
+      Video = this.backgroundHours(7, 15, 16, 17, 18);
+    } else if (2 < Month <= 4) {
+      Video = this.backgroundHours(6, 17, 18, 19, 20);
+    } else if (4 < Month <= 7) {
+      Video = this.backgroundHours(5, 18, 19, 20, 21);
+    } else if (7 < Month <= 9) {
+      Video = this.backgroundHours(7, 16, 17, 18, 19);
+    } else if (10 < Month <= 12) {
+      Video = this.backgroundHours(8, 13, 14, 15, 16);
+    }
+    return Video;
+  };
+
+  render() {
+    var Video = this.backgroundMonth();
 
     return (
       <div>
         <div>
           <video
-            autoPlay="true"
-            loop="true"
+            autoPlay={true}
+            loop={true}
             style={{
               position: "absolute",
               width: "100%",
@@ -85,9 +89,12 @@ export class homepage extends Component {
 
           <main>
             <div className="Text_back">
-              <Info />
-
-              <Display />
+              <Display
+                temperature={this.state.temperature}
+                humidity={this.state.humidity}
+                pressure={this.state.pressure}
+                air_quality={this.state.air_quality}
+              />
             </div>
           </main>
         </div>
