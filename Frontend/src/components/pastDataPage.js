@@ -18,7 +18,7 @@ export class pastDataPage extends Component {
   }
   handleButtonClick = (event) => {
     axios
-      .get("raspberrypi.local:1234/chart_data", {
+      .get("http://raspberrypi.local:1234/chart_data", {
         params: {
           typeOfTime: event.target.value,
         },
